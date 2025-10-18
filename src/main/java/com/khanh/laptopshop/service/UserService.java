@@ -30,4 +30,14 @@ public class UserService {
     public List<User> getByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
+
+    // Lấy người dùng theo id
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
+    // Xóa người dùng
+    public void deleteUserById(long id) {
+        this.userRepository.deleteById(id);
+    }
 }
