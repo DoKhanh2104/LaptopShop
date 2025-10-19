@@ -1,9 +1,7 @@
-package com.khanh.laptopshop.controller;
+package com.khanh.laptopshop.controller.admin;
 
 import com.khanh.laptopshop.domain.User;
 import com.khanh.laptopshop.service.UserService;
-
-import ch.qos.logback.core.model.processor.PhaseIndicator;
 
 import java.util.List;
 
@@ -13,10 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -40,7 +35,7 @@ public class UserController {
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users); // "users truyền qua view , users lấy dữ liệu trả về từ service"
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     // Hiển thị chi tiết người dùng
@@ -50,7 +45,7 @@ public class UserController {
         System.out.println(userByID);
         model.addAttribute("userByID", userByID);
         // model.addAttribute("id", id);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
     // Hiển thị trang tạo mới người dùng

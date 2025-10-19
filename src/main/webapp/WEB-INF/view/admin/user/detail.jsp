@@ -36,24 +36,26 @@
                                 <div class=" mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <h3>Delete User with id : ${id}</h3>
-                                            <hr>
-                                            <div class="alert alert-danger " role="alert">
-                                                Bạn có chắc chắn muốn xóa người dùng này không?
-                                            </div>
-                                            <form:form action="/admin/user/delete" modelAttribute="newUser"
-                                                method="post">
-                                                <div class="mb-3" style="display: none;">
-                                                    <label for="">ID:</label>
-                                                    <form:input type="text" class="form-control" path="id"
-                                                        value="${id}" />
-                                                </div>
-                                                <button class="btn btn-danger">Delete</button>
-                                            </form:form>
+                                            <div class="d-flex justify-content-between">
+                                                <h3>User Detail with ID = ${id}</h3>
 
+                                            </div>
+                                            <hr>
+                                            <div class="card mx-auto" style="width: 60%;">
+                                                <div class="card-header bg-primary text-white fw-bold">
+                                                    User Information
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">ID: ${id}</li>
+                                                    <li class="list-group-item">Email: ${userByID.email}</li>
+                                                    <li class="list-group-item">Full Name: ${userByID.fullName}</li>
+                                                    <li class="list-group-item">Address: ${userByID.address}</li>
+                                                </ul>
+                                            </div>
+
+                                            <a class="btn btn-primary mt-3" href="/admin/user">Quay lại</a>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </main>
