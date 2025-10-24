@@ -15,6 +15,18 @@
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
                 <title>Table User</title>
             </head>
 
@@ -39,7 +51,7 @@
                                             <h3>Create a user</h3>
                                             <hr>
                                             <form:form method="post" action="/admin/user/create"
-                                                modelAttribute="newUser" class="row">
+                                                modelAttribute="newUser" class="row" enctype="multipart/form-data">
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="">Email:</label>
@@ -68,23 +80,23 @@
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Role:</label>
-                                                    <select class="form-select" aria-label="Default select example">
-
-                                                        <option value="ADMIN">ADMIN</option>
-                                                        <option value="USER">USER</option>
-                                                    </select>
+                                                    <form:select class="form-select" aria-label="Default select example"
+                                                        path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
                                                 </div>
 
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="avatarFile" class="form-label">Avatar:</label>
-                                                    <input type="file" class="form-control" id="avaterFile"
-                                                        accept=".png, .jpg, .jpeg">
+                                                    <input type="file" class="form-control" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="avatarFile">
                                                 </div>
 
                                                 <div class="mb-3 col-12">
                                                     <img style="max-height: 250px; display: none;" alt=""
-                                                        id="avaterPreview">
+                                                        id="avatarPreview">
                                                 </div>
 
                                                 <div class="col-12 mb-5 w-100">

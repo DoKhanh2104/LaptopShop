@@ -1,24 +1,23 @@
 package com.khanh.laptopshop.controller.admin;
 
 import com.khanh.laptopshop.domain.User;
+import com.khanh.laptopshop.service.UploadService;
 import com.khanh.laptopshop.service.UserService;
 
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
     private final UserService userService;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService) {
         this.userService = userService;
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/")
@@ -49,17 +48,19 @@ public class UserController {
     }
 
     // Hiển thị trang tạo mới người dùng
-    @RequestMapping("/admin/user/create")
+    @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
     // Tạo người dùng
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createUser(Model model, @ModelAttribute("newUser") User user) {
-        System.out.println("run here" + user);
-        userService.handleSaveUser(user);
+    @PostMapping("/admin/user/create")
+    public String createUser(Model model, @ModelAttribute("newUser") User user,
+            @RequestParam("avatarFile") MultipartFile file) {
+        String avatar = this.uploadService.handleUpload(file, "avatar");
+        System.out.println(avatar);
+        // this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
