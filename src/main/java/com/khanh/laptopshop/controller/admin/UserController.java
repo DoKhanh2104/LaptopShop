@@ -5,6 +5,8 @@ import com.khanh.laptopshop.service.UploadService;
 import com.khanh.laptopshop.service.UserService;
 
 import java.util.List;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserController {
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -59,8 +64,11 @@ public class UserController {
     public String createUser(Model model, @ModelAttribute("newUser") User user,
             @RequestParam("avatarFile") MultipartFile file) {
         String avatar = this.uploadService.handleUpload(file, "avatar");
-        System.out.println(avatar);
-        // this.userService.handleSaveUser(user);
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+        user.setAvatar(avatar);
+        user.setPassword(hashPassword);
+        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
+        this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
