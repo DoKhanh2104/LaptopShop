@@ -70,7 +70,7 @@
                 <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                 <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                 <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                Designed By <a class="border-bottom" href="https://htmlcodex.com">Devi The Dev</a>
+                Designed By <a class="border-bottom" href="https://github.com/DoKhanh2104">Devi The Dev</a>
 
             </div>
         </div>
