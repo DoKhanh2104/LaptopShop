@@ -19,6 +19,9 @@ public class UploadService {
     }
 
     public String handleUpload(MultipartFile file, String targetFolder) {
+        if (file.isEmpty()) {
+            return "";
+        }
 
         String finalName = "";
         String rootPath = this.servletContext.getRealPath("/resources/images");

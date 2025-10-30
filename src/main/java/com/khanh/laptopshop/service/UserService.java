@@ -45,6 +45,7 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
+    // Lấy tên role thông qua id
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
     }

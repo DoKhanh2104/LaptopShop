@@ -19,11 +19,11 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
                     $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        avatarFile.change(function (e) {
+                        const avatarFile = $("#productFile");
+                        productFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
+                            $("#productPreview").attr("src", imgURL);
+                            $("#productPreview").css({ "display": "block" });
                         });
                     });
                 </script>
@@ -49,29 +49,60 @@
                                             <h3>Create Product</h3>
                                             <hr>
                                             <form:form class="row" modelAttribute="newProduct" method="post"
-                                                action="/admin/product/create" entype="multipart/form-data">
+                                                action="/admin/product/create" enctype="multipart/form-data">
+
+                                                <!-- Variable -->
+                                                <c:set var="nameError">
+                                                    <form:errors path="name" cssClass="invalid-feedback" />
+                                                </c:set>
+                                                <c:set var="priceError">
+                                                    <form:errors path="price" cssClass="invalid-feedback" />
+                                                </c:set>
+                                                <c:set var="detailDescError">
+                                                    <form:errors path="detailDesc" cssClass="invalid-feedback" />
+                                                </c:set>
+                                                <c:set var="shortDescError">
+                                                    <form:errors path="shortDesc" cssClass="invalid-feedback" />
+                                                </c:set>
+                                                <c:set var="quantityError">
+                                                    <form:errors path="quantity" cssClass="invalid-feedback" />
+                                                </c:set>
+
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="">Name:</label>
-                                                    <form:input type="text" class="form-control w-100" path="name" />
+                                                    <form:input type="text"
+                                                        class="form-control w-100 ${not empty nameError ? 'is-invalid' : ''} "
+                                                        path="name" />
+                                                    ${nameError}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="">Price:</label>
-                                                    <form:input type="text" class="form-control w-100" path="price" />
+                                                    <form:input type="text"
+                                                        class="form-control w-100 ${not empty priceError ? 'is-invalid' : ''} "
+                                                        path="price" />
+                                                    ${priceError}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-12">
                                                     <label for="">Detail Desciption:</label>
-                                                    <form:textarea class="form-control" rows="2" path="detailDesc" />
+                                                    <form:textarea
+                                                        class="form-control ${not empty detailDescError ? 'is-invalid' : ''} "
+                                                        rows="2" path="detailDesc" />
+                                                    ${detailDescError}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="">Short Desciption:</label>
-                                                    <form:input type="text" class="form-control w-100"
+                                                    <form:input type="text"
+                                                        class="form-control w-100 ${not empty shortDescError ? 'is-invalid' : ''} "
                                                         path="shortDesc" />
+                                                    ${shortDescError}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="">Quanlity:</label>
-                                                    <form:input type="text" class="form-control w-100"
+                                                    <form:input type="text"
+                                                        class="form-control w-100 ${not empty quantityError ? 'is-invalid' : ''} "
                                                         path="quantity" />
+                                                    ${quantityError}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Factory:</label>
@@ -91,14 +122,14 @@
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-12">
-                                                    <label for="avatarFile" class="form-label">Avatar:</label>
-                                                    <input type="file" class="form-control" id="avatarFile"
-                                                        accept=".png, .jpg, .jpeg" name="avatarFile">
+                                                    <label for="productFile" class="form-label">Image Product:</label>
+                                                    <input type="file" class="form-control" id="productFile"
+                                                        accept=".png, .jpg, .jpeg" name="productFile">
                                                 </div>
 
                                                 <div class="mb-3 col-12">
                                                     <img style="max-height: 250px; display: none;" alt=""
-                                                        id="avatarPreview">
+                                                        id="productPreview">
                                                 </div>
                                                 <div class="col-12 mb-5 w-100">
                                                     <button type="submit" class="btn btn-primary w-100">Create</button>
@@ -116,7 +147,8 @@
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
-                <script src="js/scripts.js"></script>
+                <script src="/js/scripts.js"></script>
+                <script src="../../../../resources/js/scripts.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
                     crossorigin="anonymous"></script>
             </body>

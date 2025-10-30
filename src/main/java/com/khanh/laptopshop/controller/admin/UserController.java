@@ -4,11 +4,15 @@ import com.khanh.laptopshop.domain.User;
 import com.khanh.laptopshop.service.UploadService;
 import com.khanh.laptopshop.service.UserService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -61,8 +65,18 @@ public class UserController {
 
     // Tạo người dùng
     @PostMapping("/admin/user/create")
-    public String createUser(Model model, @ModelAttribute("newUser") User user,
+    public String createUser(Model model, @ModelAttribute("newUser") @Valid User user, BindingResult bindingResult,
             @RequestParam("avatarFile") MultipartFile file) {
+
+        // Validate
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println("Error: " + error.getField() + "-" + error.getDefaultMessage());
+        }
+        if (bindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+
         String avatar = this.uploadService.handleUpload(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
         user.setAvatar(avatar);
