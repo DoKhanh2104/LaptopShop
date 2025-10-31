@@ -27,10 +27,10 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage User</h1>
+                                <h1 class="mt-4">Manage Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a> </li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active">Product</li>
                                     <li class="breadcrumb-item active">View</li>
 
                                 </ol>
@@ -38,24 +38,25 @@
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3>User Detail with ID = ${id}</h3>
+                                                <h3>Product Detail with ID = ${id}</h3>
 
                                             </div>
                                             <hr>
                                             <div class="card mx-auto" style="width: 60%;">
-
-                                                <div class="card-header bg-primary text-white fw-bold">
-                                                    User Information
+                                                <img class="card-img-top" src="/images/product/${newProduct.image}"
+                                                    alt="" />
+                                                <div class="card-header bg-primary bg-gradient text-black fw-bold">
+                                                    Product Information
                                                 </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">ID: ${id}</li>
-                                                    <li class="list-group-item">Email: ${userByID.email}</li>
-                                                    <li class="list-group-item">Full Name: ${userByID.fullName}</li>
-                                                    <li class="list-group-item">Address: ${userByID.address}</li>
+                                                    <li class="list-group-item">Name: ${newProduct.name}</li>
+                                                    <li class="list-group-item">Price: ${newProduct.price}</li>
+                                                    <li class="list-group-item">Factory: ${newProduct.factory}</li>
                                                 </ul>
                                             </div>
 
-                                            <a class="btn btn-primary mt-3" href="/admin/user">Quay lại</a>
+                                            <a class="btn btn-primary mt-3" href="/admin/product">Back</a>
                                         </div>
                                     </div>
                                 </div>

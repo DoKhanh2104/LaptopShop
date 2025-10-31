@@ -27,7 +27,7 @@
                         });
                     });
                 </script>
-                <title>Create Product</title>
+                <title>Update Product</title>
             </head>
 
             <body>
@@ -41,16 +41,16 @@
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a> </li>
                                     <li class="breadcrumb-item active">Product</li>
-                                    <li class="breadcrumb-item active">Create</li>
+                                    <li class="breadcrumb-item active">Update</li>
 
                                 </ol>
                                 <div class="mt-5" style="margin-bottom: 20px;">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto ">
-                                            <h3>Create Product</h3>
+                                            <h3>Update Product</h3>
                                             <hr>
                                             <form:form class="row" modelAttribute="newProduct" method="post"
-                                                action="/admin/product/create" enctype="multipart/form-data">
+                                                action="/admin/product/update" enctype="multipart/form-data">
 
                                                 <!-- Variable -->
                                                 <c:set var="nameError">
@@ -70,6 +70,10 @@
                                                 </c:set>
 
 
+                                                <div class="mb-3" style="display: none;">
+                                                    <label for="">ID:</label>
+                                                    <form:input type="text" class="form-control" path="id" />
+                                                </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="">Name:</label>
                                                     <form:input type="text"
@@ -134,11 +138,11 @@
                                                 </div>
 
                                                 <div class="mb-3 col-12">
-                                                    <img style="max-height: 250px; display: none;" alt=""
-                                                        id="productPreview">
+                                                    <img style="max-height: 250px;" alt="" id="productPreview"
+                                                        src="/images/product/${newProduct.image}">
                                                 </div>
                                                 <div class="col-12 mb-5 w-100">
-                                                    <button type="submit" class="btn btn-primary w-100">Create</button>
+                                                    <button type="submit" class="btn btn-warning w-100">Update</button>
                                                 </div>
 
                                             </form:form>

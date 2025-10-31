@@ -27,37 +27,34 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage User</h1>
+                                <h1 class="mt-4">Delete Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a> </li>
-                                    <li class="breadcrumb-item active">User</li>
-                                    <li class="breadcrumb-item active">View</li>
+                                    <li class="breadcrumb-item active">Product</li>
+                                    <li class="breadcrumb-item active">Delete</li>
 
                                 </ol>
                                 <div class=" mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <div class="d-flex justify-content-between">
-                                                <h3>User Detail with ID = ${id}</h3>
-
-                                            </div>
+                                            <h3>Delete Product with id : ${id}, name: ${newProduct.name}</h3>
                                             <hr>
-                                            <div class="card mx-auto" style="width: 60%;">
-
-                                                <div class="card-header bg-primary text-white fw-bold">
-                                                    User Information
-                                                </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">ID: ${id}</li>
-                                                    <li class="list-group-item">Email: ${userByID.email}</li>
-                                                    <li class="list-group-item">Full Name: ${userByID.fullName}</li>
-                                                    <li class="list-group-item">Address: ${userByID.address}</li>
-                                                </ul>
+                                            <div class="alert alert-danger " role="alert">
+                                                Are you sure to delete product ${newProduct.name}?
                                             </div>
+                                            <form:form action="/admin/product/delete" modelAttribute="newProduct"
+                                                method="post">
+                                                <div class="mb-3" style="display: none;">
+                                                    <label for="">ID:</label>
+                                                    <form:input type="text" class="form-control" path="id"
+                                                        value="${id}" />
+                                                </div>
+                                                <button class="btn btn-danger">Delete</button>
+                                            </form:form>
 
-                                            <a class="btn btn-primary mt-3" href="/admin/user">Quay lại</a>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </main>

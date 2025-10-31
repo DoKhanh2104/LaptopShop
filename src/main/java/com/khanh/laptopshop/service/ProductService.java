@@ -16,7 +16,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    // Lưu sản phẩm
+    // Save product
     public Product handleSaveProduct(Product product) {
         return this.productRepository.save(product);
     }
@@ -24,5 +24,15 @@ public class ProductService {
     // Get all product
     public List<Product> getAllProduct() {
         return this.productRepository.findAll();
+    }
+
+    // Get product by id
+    public Product getProductById(long id) {
+        return this.productRepository.findById(id);
+    }
+
+    // Delete by id
+    public void deleteProductById(long id) {
+        this.productRepository.deleteById(id);
     }
 }

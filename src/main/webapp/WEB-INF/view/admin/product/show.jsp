@@ -55,9 +55,9 @@
                                                     <c:forEach var="product" items="${products}">
                                                         <tr>
                                                             <td class="text-center">${product.id}</td>
-                                                            <td>${product.name}</td>
-                                                            <td>${product.price}</td>
-                                                            <td>${product.factory}</td>
+                                                            <td class="text-center">${product.name}</td>
+                                                            <td class="text-center">${product.price}</td>
+                                                            <td class="text-center">${product.factory}</td>
                                                             <td class="text-center">
                                                                 <a href="/admin/product/${product.id}"
                                                                     class="btn btn-success">View</a>
