@@ -120,7 +120,11 @@
                                                                 <div style="height: 220px;"
                                                                     class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                     <h4 style="min-height: 40px;font-size: 20px;">
-                                                                        ${product.name}</h4>
+                                                                        <a href="/product/${product.id}">
+                                                                            ${product.name}
+                                                                        </a>
+
+                                                                    </h4>
                                                                     <p>${product.shortDesc}</p>
                                                                     <div class="text-align-center mb-2">
                                                                         <p class="text-dark fs-5 fw-bold mb-0">
