@@ -53,9 +53,16 @@
 
                     <jsp:include page="../layout/header.jsp" />
 
+
+
                     <!-- Single Product Start -->
                     <div class="container-fluid py-5 mt-5">
+
                         <div class="container py-5">
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item"><a href="/">Homepage</a> </li>
+                                <li class="breadcrumb-item active">Detail Product</li>
+                            </ol>
                             <div class="row g-4 mb-5">
                                 <div class="col-lg-8 col-xl-9">
                                     <div class="row g-4">
@@ -248,26 +255,25 @@
                                                     </li>
                                                     <li>
                                                         <div class="d-flex justify-content-between fruite-name">
-                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
+                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Dell</a>
                                                             <span>(5)</span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="d-flex justify-content-between fruite-name">
-                                                            <a href="#"><i
-                                                                    class="fas fa-apple-alt me-2"></i>Strawbery</a>
+                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Asus</a>
                                                             <span>(2)</span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="d-flex justify-content-between fruite-name">
-                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
+                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Aser</a>
                                                             <span>(8)</span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="d-flex justify-content-between fruite-name">
-                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
+                                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Lenovo</a>
                                                             <span>(5)</span>
                                                         </div>
                                                     </li>

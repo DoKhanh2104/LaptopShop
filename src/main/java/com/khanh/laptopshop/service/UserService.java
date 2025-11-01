@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.khanh.laptopshop.domain.Role;
 import com.khanh.laptopshop.domain.User;
+import com.khanh.laptopshop.domain.dto.RegisterDTO;
 import com.khanh.laptopshop.repository.RoleRepository;
 import com.khanh.laptopshop.repository.UserRepository;
 
@@ -48,5 +49,20 @@ public class UserService {
     // Lấy tên role thông qua id
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    // Chuyển dữ liệu từ DTO sang User
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+
+        return user;
+    }
+
+    // Check email
+    public boolean existsByEmail(String email) {
+        return this.userRepository.existsByEmail(email);
     }
 }
