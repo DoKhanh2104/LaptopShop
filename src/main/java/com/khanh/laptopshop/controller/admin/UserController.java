@@ -32,7 +32,7 @@ public class UserController {
     @RequestMapping("/")
     public String getHomePage(Model model) {
         List<User> arrUser = this.userService.getAllUsers();
-        List<User> arrUserEmail = this.userService.getByEmail("khanh@gmail");
+        User arrUserEmail = this.userService.getByEmail("khanh@gmail");
         model.addAttribute("hihi", "test");
         model.addAttribute("khanh", "toi ten la khanh");
         return "hello";

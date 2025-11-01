@@ -11,7 +11,7 @@ import com.khanh.laptopshop.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User user);
 
-    List<User> findByEmail(String email);
+    User findByEmail(String email);
 
     User findById(long id);
 

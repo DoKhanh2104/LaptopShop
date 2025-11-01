@@ -32,7 +32,7 @@ public class UserService {
     }
 
     // Lấy người dùng theo email
-    public List<User> getByEmail(String email) {
+    public User getByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
 
