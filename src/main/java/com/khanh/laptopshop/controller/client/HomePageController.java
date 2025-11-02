@@ -68,8 +68,13 @@ public class HomePageController {
         return "client/auth/login";
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String getLoginPage() {
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage() {
+        return "client/auth/access-deny";
     }
 }
