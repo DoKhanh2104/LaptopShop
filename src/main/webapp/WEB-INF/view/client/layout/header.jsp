@@ -40,10 +40,9 @@
                                             aria-labelledby="dropdownMenuLink">
                                             <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
                                                 <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
-                                                    src="/images/product/1711078092373-asus-01.png" />
-                                                <div style="color: #4882E1;
-" class="text-center my-3">
-                                                    ${pageContext.request.userPrincipal.name}
+                                                    src="/images/avatar/${sessionScope.avatar}" />
+                                                <div style="color: #4882E1;" class="text-center my-3">
+                                                    ${sessionScope.fullName}
                                                 </div>
                                             </li>
                                             <li><a class="dropdown-item" href="#">Profile</a></li>
