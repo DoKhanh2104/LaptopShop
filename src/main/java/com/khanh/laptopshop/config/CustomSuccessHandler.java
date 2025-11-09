@@ -54,10 +54,20 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         String email = authentication.getName();
 
         // query tu userService
-        User userName = this.userService.getByEmail(email);
+        User user = this.userService.getByEmail(email);
 
-        session.setAttribute("fullName", userName.getFullName());
-        session.setAttribute("avatar", userName.getAvatar());
+        session.setAttribute("fullName", user.getFullName());
+        session.setAttribute("avatar", user.getAvatar());
+        session.setAttribute("id", user.getId());
+        session.setAttribute("email", user.getEmail());
+
+        if (user.getCart() != null) {
+            int sum = user.getCart().getSum();
+            session.setAttribute("sum", sum);
+        } else {
+            session.setAttribute("sum", 0);
+        }
+
     }
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
