@@ -91,6 +91,9 @@ public class ProductService {
             }
 
         }
-        // save cart detail
+    }
+
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 }
