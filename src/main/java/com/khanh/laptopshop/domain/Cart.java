@@ -1,5 +1,6 @@
 package com.khanh.laptopshop.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -20,14 +21,16 @@ public class Cart {
     private long id;
 
     @Min(value = 0)
-    private int sum;
+    private int sum = 0;
 
-    @OneToOne
+    // user_id
+    @OneToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
+    // cart_detail_id
     @OneToMany(mappedBy = "cart")
-    List<CartDetail> cartDetails;
+    private List<CartDetail> cartDetails;
 
     public long getId() {
         return id;
@@ -54,11 +57,13 @@ public class Cart {
     }
 
     public List<CartDetail> getCartDetails() {
+        if (cartDetails == null) {
+            cartDetails = new ArrayList<>();
+        }
         return cartDetails;
     }
 
     public void setCartDetails(List<CartDetail> cartDetails) {
         this.cartDetails = cartDetails;
     }
-
 }
