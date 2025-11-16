@@ -16,8 +16,11 @@ import com.khanh.laptopshop.repository.CartRepository;
 import com.khanh.laptopshop.repository.OrderDetailRepository;
 import com.khanh.laptopshop.repository.OrderRepository;
 import com.khanh.laptopshop.repository.ProductRepository;
+import com.khanh.laptopshop.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
+// import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductService {
@@ -28,16 +31,18 @@ public class ProductService {
     private final UserService userService;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
+    private final UserRepository userRepository;
 
     public ProductService(ProductRepository productRepository, CartRepository cartRepository,
             CartDetailRepository cartDetailRepository, UserService userService, OrderRepository orderRepository,
-            OrderDetailRepository orderDetailRepository) {
+            OrderDetailRepository orderDetailRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
+        this.userRepository = userRepository;
     }
 
     // Save product
@@ -129,8 +134,6 @@ public class ProductService {
                 this.cartRepository.save(currentCart);
             } else {
                 // delete cart (sum = 1)
-                currentCart.setSum(0);
-                this.cartRepository.save(currentCart);
                 this.cartRepository.deleteById(currentCart.getId());
                 session.setAttribute("sum", 0);
             }
@@ -148,6 +151,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void handlePlaceOrder(
             User user, HttpSession session,
             String receiverName, String receiverAddress, String receiverPhone) {
@@ -175,7 +179,6 @@ public class ProductService {
                 order = this.orderRepository.save(order);
 
                 // create orderDetail
-
                 for (CartDetail cd : cartDetails) {
                     OrderDetail orderDetail = new OrderDetail();
                     orderDetail.setOrder(order);
@@ -188,16 +191,28 @@ public class ProductService {
 
                 // step 2: delete cart_detail and cart
                 for (CartDetail cd : cartDetails) {
-                    this.cartDetailRepository.deleteById(cd.getId());
+                    this.cartDetailRepository.delete(cd);
                 }
 
-                this.cartRepository.deleteById(cart.getId());
+                this.cartRepository.delete(cart);
 
                 // step 3 : update session
                 session.setAttribute("sum", 0);
             }
         }
+    }
 
+    // Count in dashboard
+    public long countUser() {
+        return this.userRepository.count();
+    }
+
+    public long countProduct() {
+        return this.productRepository.count();
+    }
+
+    public long countOrder() {
+        return this.orderRepository.count();
     }
 
 }

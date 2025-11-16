@@ -10,7 +10,7 @@
                 <!-- Navbar Search-->
                 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                     <div>
-                        <p style="color: white; margin: 0;">Welcome, Do Hung Quoc Khanh</p>
+                        <p style="color: white; margin: 0;">Welcome, ${sessionScope.fullName} </p>
                     </div>
                 </form>
                 <!-- Navbar-->

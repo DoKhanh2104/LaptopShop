@@ -7,5 +7,5 @@ import com.khanh.laptopshop.domain.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-
+    Order save(Order order);
 }

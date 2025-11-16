@@ -1,15 +1,19 @@
 package com.khanh.laptopshop.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -19,27 +23,38 @@ public class Product {
     private long id;
 
     @NotNull
-    @NotEmpty(message = "The name can not be null")
+    @Size(min = 2, message = "tên sản phẩm không được bỏ trống !!")
     private String name;
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be than 0")
+    @NotNull
+    @DecimalMin(value = "0", inclusive = false, message = "Giá tiền không được vỏ trống !")
     private double price;
+
     private String image;
 
     @NotNull
-    @NotEmpty(message = "The detail description can not be null")
+    @NotEmpty(message = "Chi tiết sản pohaamr không được bỏ trống")
     @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
     @NotNull
-    @NotEmpty(message = "The short description can not be null")
+    @NotEmpty(message = "Chi tiết sản phẩm không được bỏ trống")
     private String shortDesc;
 
-    @Min(value = 1, message = "Quantity must be than 1")
+    @NotNull
+    @Min(value = 1, message = "Số lượng không được bỏ trống !!")
     private long quantity;
+
     private long sold;
     private String factory;
     private String target;
+
+    @Override
+    public String toString() {
+        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", detailDesc="
+                + detailDesc + ", shortDesc=" + shortDesc + ", quantity=" + quantity + ", sold=" + sold + ", factory="
+                + factory + ", target=" + target + "]";
+    }
 
     public long getId() {
         return id;

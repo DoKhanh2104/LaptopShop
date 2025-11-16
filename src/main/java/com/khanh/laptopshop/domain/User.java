@@ -18,35 +18,44 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // id tu tang
+    private Long id;
 
     @NotNull
-    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @Email(message = "Email không hợp lệ !!", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
     @NotNull
-    @Size(min = 3, message = "Password must be than 3 character")
+    @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
     private String password;
 
     @NotNull
-    @Size(min = 5, message = "Fullname must be than 5 character")
+    @Size(min = 3, message = "Full Name phải có tối thiểu 3 ký tự")
     private String fullName;
+
     private String address;
     private String phone;
     private String avatar;
 
+    // nhieu User -> 1 role
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    private List<Order> order;
 
-    @OneToOne(mappedBy = "user", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user")
     private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public Role getRole() {
         return role;
@@ -56,19 +65,19 @@ public class User {
         this.role = role;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Order> getOrder() {
+        return order;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrder(List<Order> order) {
+        this.order = order;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -112,12 +121,6 @@ public class User {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + ", ]";
-    }
-
     public String getAvatar() {
         return avatar;
     }
@@ -126,12 +129,10 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
     }
 
 }
