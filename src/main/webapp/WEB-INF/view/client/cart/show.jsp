@@ -79,7 +79,7 @@
                                                 </td>
                                             </tr>
                                         </c:if>
-                                        <c:forEach var="cartDetail" items="${cartDetails}">
+                                        <c:forEach var="cartDetail" items="${cartDetails}" varStatus="status">
                                             <tr>
                                                 <th scope="row">
                                                     <div class="d-flex align-items-center">
@@ -112,7 +112,8 @@
                                                             class="form-control form-control-sm text-center border-0"
                                                             value="${cartDetail.quantity}"
                                                             data-cart-detail-id="${cartDetail.id}"
-                                                            data-cart-detail-price="${cartDetail.price}">
+                                                            data-cart-detail-price="${cartDetail.price}"
+                                                            data-cart-detail-index="${status.index}">
                                                         <div class="input-group-btn">
                                                             <button
                                                                 class="btn btn-sm btn-plus rounded-circle bg-light border">

@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.khanh.laptopshop.domain.User user = this.userService.getByEmail(username);
+        com.khanh.laptopshop.domain.User user = this.userService.getUserByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

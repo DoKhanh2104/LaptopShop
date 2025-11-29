@@ -48,6 +48,9 @@
                                                                 <th>ID</th>
                                                                 <th>Total Price</th>
                                                                 <th>User</th>
+                                                                <th>Receiver Name</th>
+                                                                <th>Receiver Address</th>
+                                                                <th>Receiver Phone</th>
                                                                 <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
@@ -63,6 +66,9 @@
 
                                                                 </td>
                                                                 <td class="text-center">${order.user.fullName}</td>
+                                                                <td class="text-center">${order.receiverName}</td>
+                                                                <td class="text-center">${order.receiverAddress}</td>
+                                                                <td class="text-center">${order.receiverPhone}</td>
                                                                 <td class="text-center">${order.status}</td>
                                                                 <td class="text-center">
                                                                     <a href="/admin/order/${order.id}"

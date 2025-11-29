@@ -7,5 +7,5 @@ import com.khanh.laptopshop.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Product save(Product product);
+
 }
