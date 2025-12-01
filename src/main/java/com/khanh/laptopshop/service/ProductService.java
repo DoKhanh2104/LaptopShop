@@ -3,6 +3,8 @@ package com.khanh.laptopshop.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.khanh.laptopshop.domain.Cart;
@@ -215,6 +217,10 @@ public class ProductService {
 
     public long countOrder() {
         return this.orderRepository.count();
+    }
+
+    public Page<Product> fetchAllProduct(Pageable page) {
+        return this.productRepository.findAll(page);
     }
 
 }

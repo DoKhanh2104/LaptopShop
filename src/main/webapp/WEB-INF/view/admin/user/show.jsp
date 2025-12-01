@@ -73,6 +73,35 @@
                                                     </c:forEach>
 
                                                 </table>
+
+                                                <nav class="d-flex justify-content-center"
+                                                    aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        <li class="page-item">
+                                                            <a class="page-link ${currentPage == 1 ? 'disabled' : ''}"
+                                                                href="/admin/user?page=${currentPage - 1}"
+                                                                aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+                                                        <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                                                            <li
+                                                                class="page-item ${currentPage == loop.index ? 'active' : ''}">
+                                                                <a class="page-link"
+                                                                    href="/admin/user?page=${loop.index}">${loop.index}</a>
+                                                            </li>
+                                                        </c:forEach>
+
+
+                                                        <li class="page-item">
+                                                            <a class="page-link ${currentPage == totalPage ? 'disabled' : ''}"
+                                                                href="/admin/user?page=${currentPage + 1}"
+                                                                aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
                                             </div>
                                         </div>
                                     </div>

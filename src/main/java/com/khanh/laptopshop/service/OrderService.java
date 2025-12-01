@@ -2,6 +2,8 @@ package com.khanh.laptopshop.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.khanh.laptopshop.domain.Order;
@@ -37,5 +39,9 @@ public class OrderService {
 
     public void deleteOrderDetail(long id) {
         this.orderDetailRepository.deleteById(id);
+    }
+
+    public Page<Order> fetchAllOrder(Pageable pageable) {
+        return this.orderRepository.findAll(pageable);
     }
 }

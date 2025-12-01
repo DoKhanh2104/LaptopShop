@@ -7,7 +7,11 @@ import com.khanh.laptopshop.service.UserService;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,20 +33,24 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        // List<User> arrUser = this.userService.getAllUsers();
-        // User arrUserEmail = this.userService.getByEmail("khanh@gmail");
-        model.addAttribute("hihi", "test");
-        model.addAttribute("khanh", "toi ten la khanh");
-        return "hello";
-    }
-
     // Hiển thị table người dùng
     @RequestMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = this.userService.getAllUsers();
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 2);
+        Page<User> pageUser = this.userService.fetchAllUser(pageable);
+        List<User> users = pageUser.getContent();
         model.addAttribute("users", users); // "users truyền qua view , users lấy dữ liệu trả về từ service"
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPage", pageUser.getTotalPages());
         return "admin/user/show";
     }
 

@@ -70,6 +70,29 @@
                                                     </c:forEach>
 
                                                 </table>
+
+                                                <nav class="d-flex justify-content-center"
+                                                    aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                            <a class="page-link" href="/admin/product?page=${currentPage - 1}" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <c:forEach begin="0" end="${totalPage - 1}" varStatus="loop">
+                                                            <li class="page-item ${currentPage == loop.index + 1 ? 'active' : ''}"><a class="page-link"
+                                                                    href="/admin/product?page=${loop.index + 1}">${loop.index + 1}</a>
+                                                            </li>
+                                                        </c:forEach>
+
+                                                        <li class="page-item ${currentPage == totalPage ? 'disabled' : ''}">
+                                                            <a class="page-link" href="/admin/product?page=${currentPage + 1}" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
                                             </div>
                                         </div>
                                     </div>
