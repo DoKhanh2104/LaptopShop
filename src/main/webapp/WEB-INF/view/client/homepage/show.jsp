@@ -83,44 +83,49 @@
                                                     <!-- Item -->
                                                     <c:forEach var="product" items="${products}">
                                                         <div class="col-md-6 col-lg-4 col-xl-3 ">
-                                                            <div class="rounded position-relative fruite-item ">
-                                                                <div
-                                                                    class="fruite-img overflow-hidden border border-secondary border-bottom-0 rounded-top">
-                                                                    <img style="height: 200px;object-fit: cover"
-                                                                        src="/images/product/${product.image}"
-                                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                                </div>
-                                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                                    style="top: 10px; left: 10px;">Laptop</div>
-                                                                <div style="height: 220px;"
-                                                                    class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                                    <h4 style="min-height: 52px;font-size: 20px;">
-                                                                        <a href="/product/${product.id}">
-                                                                            ${product.name}
-                                                                        </a>
-
-                                                                    </h4>
-                                                                    <p style="font-size: 12px;">${product.shortDesc}</p>
-                                                                    <div class="text-align-center mb-2">
-                                                                        <p class="text-dark fs-5 fw-bold mb-0">
-                                                                            <fmt:formatNumber type="number"
-                                                                                value="${product.price}" /> Đ
-                                                                        </p>
-
+                                                            <a href="/product/${product.id}">
+                                                                <div class="rounded position-relative fruite-item ">
+                                                                    <div
+                                                                        class="fruite-img overflow-hidden border border-secondary border-bottom-0 rounded-top">
+                                                                        <img style="height: 200px;object-fit: cover"
+                                                                            src="/images/product/${product.image}"
+                                                                            class="img-fluid w-100 rounded-top" alt="">
                                                                     </div>
-                                                                    <form action="/add-product-to-cart/${product.id}"
-                                                                        method="post">
-                                                                        <input type="hidden"
-                                                                            name="${_csrf.parameterName}"
-                                                                            value="${_csrf.token}" />
-                                                                        <button
-                                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                                class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                            Add to cart
-                                                                        </button>
-                                                                    </form>
+                                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                                        style="top: 10px; left: 10px;">Laptop</div>
+                                                                    <div style="height: 220px;"
+                                                                        class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                                        <h4 style="min-height: 52px;font-size: 20px;">
+                                                                            <a href="/product/${product.id}">
+                                                                                ${product.name}
+                                                                            </a>
+
+                                                                        </h4>
+                                                                        <p style="font-size: 12px;">${product.shortDesc}
+                                                                        </p>
+                                                                        <div class="text-align-center mb-2">
+                                                                            <p class="text-dark fs-5 fw-bold mb-0">
+                                                                                <fmt:formatNumber type="number"
+                                                                                    value="${product.price}" /> Đ
+                                                                            </p>
+
+                                                                        </div>
+                                                                        <form
+                                                                            action="/add-product-to-cart/${product.id}"
+                                                                            method="post">
+                                                                            <input type="hidden"
+                                                                                name="${_csrf.parameterName}"
+                                                                                value="${_csrf.token}" />
+                                                                            <button
+                                                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                                Add to cart
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            </a>
+
                                                         </div>
                                                     </c:forEach>
 

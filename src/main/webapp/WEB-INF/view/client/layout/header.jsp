@@ -45,8 +45,8 @@
                                                     ${sessionScope.fullName}
                                                 </div>
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                                            <li><a class="dropdown-item" href="#">Order History</a></li>
+                                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                            <li><a class="dropdown-item" href="/order-history">Order History</a></li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>

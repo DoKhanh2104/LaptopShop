@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.khanh.laptopshop.domain.Order;
 import com.khanh.laptopshop.domain.OrderDetail;
+import com.khanh.laptopshop.domain.User;
 import com.khanh.laptopshop.repository.OrderDetailRepository;
 import com.khanh.laptopshop.repository.OrderRepository;
 
@@ -43,5 +44,9 @@ public class OrderService {
 
     public Page<Order> fetchAllOrder(Pageable pageable) {
         return this.orderRepository.findAll(pageable);
+    }
+
+    public List<Order> getOrdersByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 }
