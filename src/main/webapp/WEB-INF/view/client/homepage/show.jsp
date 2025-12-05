@@ -38,6 +38,11 @@
 
                     <!-- Template Stylesheet -->
                     <link href="/client/css/style.css" rel="stylesheet">
+                    <meta name="_csrf" content="${_csrf.token}" />
+                    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
+                    <link rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 
                     <title>Home Page</title>
                 </head>
@@ -110,18 +115,18 @@
                                                                             </p>
 
                                                                         </div>
-                                                                        <form
+                                                                        <!-- <form
                                                                             action="/add-product-to-cart/${product.id}"
                                                                             method="post">
                                                                             <input type="hidden"
                                                                                 name="${_csrf.parameterName}"
-                                                                                value="${_csrf.token}" />
-                                                                            <button
-                                                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                                Add to cart
-                                                                            </button>
-                                                                        </form>
+                                                                                value="${_csrf.token}" /> -->
+                                                                        <button data-product-id="${product.id}"
+                                                                            class="btnAddToCartHomePage btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                                                class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                            Add to cart
+                                                                        </button>
+                                                                        <!-- </form> -->
                                                                     </div>
                                                                 </div>
                                                             </a>
@@ -158,8 +163,85 @@
                     <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
                     <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
 
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+
                     <!-- Template Javascript -->
                     <script src="/client/js/main.js"></script>
+                    
+                    <script>
+                    $(document).ready(function() {
+                        console.log('Homepage loaded');
+                        
+                        $('.btnAddToCartHomePage').click(function(e) {
+                            e.preventDefault();
+                            console.log('Homepage button clicked!');
+                            
+                            const productId = $(this).attr('data-product-id');
+                            console.log('Product ID:', productId);
+                            
+                            const token = $("meta[name='_csrf']").attr("content");
+                            const header = $("meta[name='_csrf_header']").attr("content");
+                            const quantity = 1;
+                            
+                            console.log('Token:', token);
+                            console.log('Header:', header);
+                            console.log('Quantity:', quantity);
+                            
+                            $.ajax({
+                                url: '/api/add-product-to-cart',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                beforeSend: function(xhr) {
+                                    xhr.setRequestHeader(header, token);
+                                },
+                                data: JSON.stringify({
+                                    productId: parseInt(productId),
+                                    quantity: parseInt(quantity)
+                                }),
+                                success: function(response) {
+                                    console.log('Success:', response);
+                                    $('#sumCart').text(response);
+                                    
+                                    $.toast({
+                                        heading: '🛒 Thành công',
+                                        text: 'Sản phẩm đã được thêm vào giỏ hàng của bạn!',
+                                        position: 'top-right',
+                                        icon: 'success',
+                                        showHideTransition: 'slide',
+                                        allowToastClose: true,
+                                        hideAfter: 3000,
+                                        stack: 5,
+                                        textAlign: 'left',
+                                        bgColor: '#28a745',
+                                        textColor: 'white',
+                                        loader: false
+                                    });
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error:', error);
+                                    console.error('Response:', xhr.responseText);
+                                    
+                                    $.toast({
+                                        heading: '❌ Lỗi',
+                                        text: 'Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại!',
+                                        position: 'top-right',
+                                        icon: 'error',
+                                        showHideTransition: 'slide',
+                                        allowToastClose: true,
+                                        hideAfter: 4000,
+                                        stack: 5,
+                                        textAlign: 'left',
+                                        bgColor: '#dc3545',
+                                        textColor: 'white',
+                                        loader: false
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    </script>
                 </body>
 
                 </html>

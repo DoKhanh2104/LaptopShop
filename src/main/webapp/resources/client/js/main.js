@@ -320,5 +320,165 @@
         $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop('checked', true);
     }
 
+
+    //handle add to cart with ajax
+    $('.btnAddToCartHomePage').click(function (event) {
+       event.preventDefault();
+
+       if (!isLogin()) {
+           $.toast({
+               heading: '⚠️ Cần đăng nhập',
+               text: 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng!',
+               position: 'top-right',
+               icon: 'warning',
+               showHideTransition: 'slide',
+               allowToastClose: true,
+               hideAfter: 4000,
+               stack: 5,
+               textAlign: 'left',
+               bgColor: '#ffc107',
+               textColor: '#212529',
+               loader: false
+           })
+           return;
+       }
+
+       const productId = $(this).attr('data-product-id');
+       const token = $("meta[name='_csrf']").attr("content");
+       const header = $("meta[name='_csrf_header']").attr("content");
+       const quantity = 1;
+
+       $.ajax({
+           url: `${window.location.origin}/api/add-product-to-cart`,
+           beforeSend: function (xhr) {
+               xhr.setRequestHeader(header, token);
+               console.log(this.uri)
+           },
+           type: "POST",
+           data: JSON.stringify({quantity: quantity, productId: productId}),
+           contentType: "application/json",
+
+           success: function (response) {
+               const sum = +response;
+               //update cart
+               $("#sumCart").text(sum);
+               //show message
+               $.toast({
+                   heading: '🛒 Thành công',
+                   text: 'Sản phẩm đã được thêm vào giỏ hàng của bạn!',
+                   position: 'top-right',
+                   icon: 'success',
+                   showHideTransition: 'slide',
+                   allowToastClose: true,
+                   hideAfter: 3000,
+                   stack: 5,
+                   textAlign: 'left',
+                   bgColor: '#28a745',
+                   textColor: 'white',
+                   loader: false
+               })
+           },
+           error: function (response) {
+               $.toast({
+                   heading: '❌ Lỗi',
+                   text: 'Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại!',
+                   position: 'top-right',
+                   icon: 'error',
+                   showHideTransition: 'slide',
+                   allowToastClose: true,
+                   hideAfter: 4000,
+                   stack: 5,
+                   textAlign: 'left',
+                   bgColor: '#dc3545',
+                   textColor: 'white',
+                   loader: false
+               })
+               console.log("error: ", response)
+           }
+       })
+    });
+
+    $('.btnAddToCartDetail').click(function (event) {
+        event.preventDefault();
+
+        if (!isLogin()) {
+            $.toast({
+                heading: '⚠️ Cần đăng nhập',
+                text: 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng!',
+                position: 'top-right',
+                icon: 'warning',
+                showHideTransition: 'slide',
+                allowToastClose: true,
+                hideAfter: 4000,
+                stack: 5,
+                textAlign: 'left',
+                bgColor: '#ffc107',
+                textColor: '#212529',
+                loader: false
+            })
+            return;
+        }
+
+        const productId = $(this).attr('data-product-id');
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
+        const quantity = $('.quantity input').val() || 1;
+
+        $.ajax({
+            url: `${window.location.origin}/api/add-product-to-cart`,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            type: "POST",
+            data: JSON.stringify({quantity: quantity, productId: productId}),
+            contentType: "application/json",
+
+            success: function (response) {
+                const sum = +response;
+                //update cart
+                $("#sumCart").text(sum);
+                //show message
+                $.toast({
+                    heading: '🛒 Thành công',
+                    text: 'Sản phẩm đã được thêm vào giỏ hàng của bạn!',
+                    position: 'top-right',
+                    icon: 'success',
+                    showHideTransition: 'slide',
+                    allowToastClose: true,
+                    hideAfter: 3000,
+                    stack: 5,
+                    textAlign: 'left',
+                    bgColor: '#28a745',
+                    textColor: 'white',
+                    loader: false
+                })
+            },
+            error: function (response) {
+                $.toast({
+                    heading: '❌ Lỗi',
+                    text: 'Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại!',
+                    position: 'top-right',
+                    icon: 'error',
+                    showHideTransition: 'slide',
+                    allowToastClose: true,
+                    hideAfter: 4000,
+                    stack: 5,
+                    textAlign: 'left',
+                    bgColor: '#dc3545',
+                    textColor: 'white',
+                    loader: false
+                })
+                console.log("error: ", response)
+            }
+        })
+    });
+
+    function isLogin() {
+        const navElement = $("#navbarCollapse");
+        const childLogin = navElement.find('a.a-login');
+        return !(childLogin.length > 0);
+    }
+
+
 })(jQuery);
 
